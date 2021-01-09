@@ -1,4 +1,4 @@
-
+// id de html
   var texto = document.getElementById("texto_lineas")
   var boton = document.getElementById("botoncito")
   boton.addEventListener("click", dibujoporClick );
