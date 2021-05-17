@@ -1,14 +1,12 @@
 // id de html
-  var texto = document.getElementById("texto_lineas")
-  var boton = document.getElementById("botoncito")
-  boton.addEventListener("click", dibujoporClick );
+  const texto = document.getElementById("texto_lineas");
+  const btn = document.getElementById("button");
+  const canvas = document.getElementById("canvas");
+  const lienzo = canvas.getContext("2d");
+  const anchoCanvas = canvas.width;
+  
 
-  var d = document.getElementById("dibujito");
-  var ancho = d.width;
-  var lienzo = d.getContext("2d");
-
-function dibujarLinea(color, x_inicial, y_inicial, x_final, y_final)
-  {
+  function dibujarLinea(color, x_inicial, y_inicial, x_final, y_final) {
     lienzo.beginPath();
     lienzo.strokeStyle = color;
     lienzo.moveTo(x_inicial, y_inicial);
@@ -17,22 +15,21 @@ function dibujarLinea(color, x_inicial, y_inicial, x_final, y_final)
     lienzo.closePath()
   }
 
-  function dibujoporClick()
-  {
-    var lineas = parseInt(texto.value);
-    var l = 0
+  btn.addEventListener("click", function dibujoporClick() {
+    const cantidadLineas = parseInt(texto.value);
+    var l = 0;
     var y_i, x_f, x_i, y_f;
-    var colorsito = "#FAA";
-    var espacio = ancho / lineas;
+    const colorLineas = "#FAA";
+    var espacioCanvas = anchoCanvas / cantidadLineas;
 
-  for (l = 0; l < lineas; l++)
+  for (l = 0; l < cantidadLineas; l++)
     {
       x_i = 0
-      y_i = espacio * l;
-      x_f = espacio * (l + 1);
+      y_i = espacioCanvas * l;
+      x_f = espacioCanvas * (l + 1);
       y_f = 500
-      dibujarLinea(colorsito ,y_i, x_i, y_f, x_f);
-      dibujarLinea(colorsito ,x_i, y_i, x_f, y_f);
+      dibujarLinea(colorLineas ,y_i, x_i, y_f, x_f);
+      dibujarLinea(colorLineas ,x_i, y_i, x_f, y_f);
     }
 
     dibujarLinea("Black", 0, 0, 500, 0 )
@@ -41,4 +38,4 @@ function dibujarLinea(color, x_inicial, y_inicial, x_final, y_final)
     dibujarLinea("Black", 0, 500, 500, 500 )
     dibujarLinea("Black", 0, 0, 500, 500 )
     dibujarLinea("Black", 0, 0, 500, 500 )
-  }
+  });
