@@ -7,11 +7,11 @@
   </head>
 
   <body>
-  <h1>Dibujo en canvas</h1>
-    <p class="pregunta">Cuantas lineas quieres??
-      <input type="text" id="texto_lineas"/>
-      <input type="button" value="Continuar!" id="button"/>
-    </p>
+  <h1 class="title__page">Dibujo en canvas</h1>
+    <form id="form">
+      <input class="content__form input__form" type="text" name="NumberLines" placeholder="Cuantas lineas quieres?">
+      <button class="content__form send__form">Enviar</button>
+    </form>
     <canvas width="500" height="500" id="canvas"></canvas>
     <script src="dibujo.js"></script>
   </body>

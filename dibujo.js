@@ -1,41 +1,36 @@
-// id de html
-  const texto = document.getElementById("texto_lineas");
-  const btn = document.getElementById("button");
+  const form = document.getElementById('form');
   const canvas = document.getElementById("canvas");
-  const lienzo = canvas.getContext("2d");
-  const anchoCanvas = canvas.width;
-  
+  const canvasType = canvas.getContext("2d");
 
-  function dibujarLinea(color, x_inicial, y_inicial, x_final, y_final) {
-    lienzo.beginPath();
-    lienzo.strokeStyle = color;
-    lienzo.moveTo(x_inicial, y_inicial);
-    lienzo.lineTo(x_final, y_final);
-    lienzo.stroke();
-    lienzo.closePath()
+  const drawLine = (color, x_initial, y_initial, x_final, y_final) => {
+    canvasType.beginPath();
+    canvasType.strokeStyle = color;
+    canvasType.moveTo(x_initial, y_initial);
+    canvasType.lineTo(x_final, y_final);
+    canvasType.stroke();
+    canvasType.closePath();
   }
 
-  btn.addEventListener("click", function dibujoporClick() {
-    const cantidadLineas = parseInt(texto.value);
-    var l = 0;
-    var y_i, x_f, x_i, y_f;
-    const colorLineas = "#FAA";
-    var espacioCanvas = anchoCanvas / cantidadLineas;
+  form.addEventListener("submit", evt => {
+    const numberOfLines = parseInt(form.NumberLines.value);
+  if (numberOfLines && numberOfLines > 0 && numberOfLines !== "") {
+    const totalCanvas = canvas.width / numberOfLines;
+    const colorLines = '#FAA';
+    const colorFrame = '#eee';
 
-  for (l = 0; l < cantidadLineas; l++)
-    {
-      x_i = 0
-      y_i = espacioCanvas * l;
-      x_f = espacioCanvas * (l + 1);
-      y_f = 500
-      dibujarLinea(colorLineas ,y_i, x_i, y_f, x_f);
-      dibujarLinea(colorLineas ,x_i, y_i, x_f, y_f);
-    }
-
-    dibujarLinea("Black", 0, 0, 500, 0 )
-    dibujarLinea("Black", 0, 0, 0, 500 )
-    dibujarLinea("Black", 500, 0, 500, 500 )
-    dibujarLinea("Black", 0, 500, 500, 500 )
-    dibujarLinea("Black", 0, 0, 500, 500 )
-    dibujarLinea("Black", 0, 0, 500, 500 )
-  });
+  for (let i = 0; i < numberOfLines; i++) {
+      let x_i = 0;
+      let y_i = totalCanvas * i;
+      let x_f = totalCanvas * (i + 1);
+      let y_f = 500;
+      drawLine(colorLines ,y_i, x_i, y_f, x_f);
+      drawLine(colorLines ,x_i, y_i, x_f, y_f);
+  }
+  // Picture frame
+    drawLine(colorFrame, 0, 0, 500, 0 );
+    drawLine(colorFrame, 0, 0, 0, 500 );
+    drawLine(colorFrame, 500, 0, 500, 500 );
+    drawLine(colorFrame, 0, 500, 500, 500 );
+    evt.preventDefault()
+  }
+});
